@@ -1,3 +1,9 @@
+/**
+ * This is our data! It is all hard coded into the server, meaning any changes
+ * made via api calls will not be saved. When the server is reset, the data
+ * will revert back to exactly as it is seen here
+ */
+
 module.exports = {
     products: [
         {

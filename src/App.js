@@ -20,6 +20,9 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // The commented out axios pulls data from DevMountain's API. The other axios call is pulling the data from
+    // from the server
+
     // axios.get( 'https://practiceapi.devmountain.com/products' )
     axios.get( 'http://localhost:3005/api/products' )
       .then( res => {
@@ -29,6 +32,7 @@ class App extends Component {
       } )
   }
 
+  // This method takes the image URL and price from the item that is clicked, and saves it to state
   handleClick( img, price ) {
     this.setState({
       productImg: img,
@@ -36,6 +40,7 @@ class App extends Component {
     })
   }
 
+  // This method adds the price of the currently selected item to the cart total on state
   addToCart() {
     console.log( 'hit!' )
     let total = Number( this.state.cartTotal ) + Number( this.state.productPrice )
@@ -46,6 +51,8 @@ class App extends Component {
   
   render() {
 
+    // This maps through the array of products, displays their images, and assigns the
+    // onClick event to each item
     let products = this.state.products.map( (product, i) => {
       return (
         <div key={i} className='product' onClick={() => this.handleClick(product.image, product.price)}>
@@ -58,14 +65,17 @@ class App extends Component {
       <div className="App">
         <div className='productContainer'>
 
+          {/* Displays the total cost of items in your cart */}
           <p>CART TOTAL: ${this.state.cartTotal}.00</p>
 
+          {/* Displays the large image when a small image is clicked */}
           <Detail
-            productImg={this.state.productImg}
-            productPrice={this.state.productPrice}
-            addToCart={this.addToCart}
+            productImg={this.state.productImg} // image URL of product
+            productPrice={this.state.productPrice} // price of product
+            addToCart={this.addToCart} // method passed down that adds the selected product's price to the cart total
           />
 
+          {/* Displays all of the product options */}
           {products}
         </div>
       </div>
